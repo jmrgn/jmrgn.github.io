@@ -38,4 +38,50 @@ Unfortunately, enabling various windows capabilities and features isn't quite as
 
 Fortunately, someone else already thought of that. [Boxstarter](http://boxstarter.org/) builds on the Chocolatey package management system and takes it one step further. It is a framework that is designed for the installation of a complete environment on a fresh OS. This can get complicated, often resulting in multiple machine reboots as things are installed and added to the registry. Luckily Boxstarter is reboot resilient as well. The system will intercept chocolatey install commands, checks for reboots, recycles the machine, logs the user back in and resumes installation. In theory at least. I wanted to try it out for myself.
 
+My main goal of this is to prove out that we can use it to base-kick a developer machine and a production webserver using the same tool. Consequently, I ended up modifying one of their sample scripts to include a series of things a developer might want and a few features that could be necessary to configure a machine in prod.
 
+```
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Enable-RemoteDesktop
+
+cinst fiddler4
+cinst git
+cinst git-credential-winstore
+cinst ChocolateyGUI
+cinst sysinternals
+cinst python
+cinst console-devel
+cinst notepadplusplus
+cinst GoogleChrome
+cinst nodejs.install
+cinst mysql.workbench
+cinst putty
+cinst NuGet.CommandLine
+cinst virtualbox
+cinst Wget
+cinst curl
+cinst poshgit
+
+
+cinst Microsoft-Hyper-V-All -source windowsFeatures
+cinst IIS-WebServerRole -source windowsfeatures
+```
+
+This script contains setting windows explorer settings, installing developer tools like git, fiddler, and sysinternals, language releases, and enables Hyper-V and IIS. Now all that's left is to run it.
+
+![Start it up](/img/boxstarter-kickoff.png)
+
+All I needed to do was pass in a credentials object (in case of reboot) and the path to the script.
+
+![Running](/img/boxstarter-installing.png)
+
+It turns out one of the packages I installed required a reboot. Let's see how Boxstarter handles it. Note that I'm passing in an absolute path in the arguments above. The first time I tried it I got a "not found" error when the script tried to resume after the machine recycled.
+
+![Rebooted](/img/boxstarter-restart.png)
+
+I logged back in the check the progress after the machine restarted. The powershell prompt pops right back up and it resumed and the script continued execution until success.
+
+
+### Conclusions
+
+I finished up liking what I saw. Even better, after a bit more research I learned that the `0.9.8.20` release of Chocolatey contains many of the features Boxstarter offers and adds several more. To my knowedge, the reboot capabilities of boxstarter still have quite a bit to offer and for the moment it is still a relevant utility to use. My hope is that soon my team can have a script put together that will base install a fresh developer machine with everything we need. This will save valuable time when trying to get new devs started or a developer's machine is replaced. A stretch goal would be to use the same technology for base installations of web and app servers in our development and production environments. All in all, I'd consider it a successful afternoon.
