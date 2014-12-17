@@ -5,6 +5,7 @@ date:   2014-12-15 20:15:00
 categories: consul, configuration, configuration management
 ---
 
+Managing configuration is a conceptually simple problem that developers tend to overcomplicate.
 
 ## The Problem
 
@@ -78,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 end
 ```
 
-```powershell
+```
 C:\projects\config-consul [master]> vagrant up
 C:\projects\config-consul [master]> vagrant ssh consul1
 ```
@@ -98,7 +99,7 @@ Now that the basics are taken care of, it's time to move on to consul's configur
 The K/V store is supported out-of-box with the above installation. As the "Getting Started" documentation on the Consul website states, this can be tested by performing a simple curl against the HTTP API:
 
 ```
-vagrant@consul1:~/consul_demo$ curl -v http://localhost:8500/v1/kv/?recurse
+vagrant@consul1:~/consul_demo$ curl -v http://localhost:8500/v1/kv/?recurse | python -m json.tool
 * About to connect() to localhost port 8500 (#0)
 *   Trying 127.0.0.1... connected
 > GET /v1/kv/?recurse HTTP/1.1
@@ -133,7 +134,7 @@ true
 This adds three values to the keystore - test1, test2, test3 - with keys consultest1, consultest2, consultest3 respectively. The can be verified by running the previous recursive command.
 
 ```
-vagrant@consul1:~/consul_demo$ curl -v http://localhost:8500/v1/kv/?recurse
+vagrant@consul1:~/consul_demo$ curl -v http://localhost:8500/v1/kv/?recurse | python -m json.tool
 * About to connect() to localhost port 8500 (#0)
 *   Trying 127.0.0.1... connected
 > GET /v1/kv/?recurse HTTP/1.1
