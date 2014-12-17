@@ -20,7 +20,7 @@ So what would I prefer? A configuration solution meeting the following criteria:
  * Able to store sensitive information (secure)
  * Able to be utilized regardless of environment
 
-These criteria all-but scream HTTP API. However, the mechanism by which a client adds or retrieves configuration data isn't the only factor at play. Ideally, the configuration manager would be fast, scalable, and provide some mechanism for redundancy. Fortunately, I didn't have too look for long before coming across something promising. A colleague pointed me toward [http://consul.io](Consul), made at least in part by a few of the same people responsible for the terribly useful environment scaffolding tool (https://www.vagrantup.com/)[Vagrant]. This is already looking promising.
+These criteria all-but scream HTTP API. However, the mechanism by which a client adds or retrieves configuration data isn't the only factor at play. Ideally, the configuration manager would be fast, scalable, and provide some mechanism for redundancy. Fortunately, I didn't have too look for long before coming across something promising. A colleague pointed me toward [Consul](http://consul.io), made at least in part by a few of the same people responsible for the terribly useful environment scaffolding tool [Vagrant](https://www.vagrantup.com/). This is already looking promising.
 
 ### What is Consul?
 
@@ -39,7 +39,7 @@ The last bullet is obviously the subject of this post, but each could easily war
 
 ### The Setup
 
-Unsurprisingly, it didn't take long for to find a sample Vagrant file that could easily be modified into a simple (https://github.com/jmrgn/config-consul)[demo]. For the sake of simplicity, I'll only be working with one consul agent working in server mode rather than using a cluster.
+Unsurprisingly, it didn't take long for to find a sample Vagrant file that could easily be modified into a simple [demo](https://github.com/jmrgn/config-consul). For the sake of simplicity, I'll only be working with one consul agent working in server mode rather than using a cluster.
 
 ```ruby
 # -*- mode: ruby -*-
@@ -211,7 +211,7 @@ vagrant@consul1:~/consul_demo$ curl -X PUT -d 'newval' http://localhost:8500/v1/
 false
 ```
 
-The above request failed due to a check-and-set value (87) below the ModifyIndex (88) of the key being modified. Consul's Kev/Value API even provides the ability to wait until a given ModifyIndex has been met until a given time limit has been met. Additional documentation can be found [https://consul.io/docs/agent/http.html](here).
+The above request failed due to a check-and-set value (87) below the ModifyIndex (88) of the key being modified. Consul's Kev/Value API even provides the ability to wait until a given ModifyIndex has been met until a given time limit has been met. Additional documentation can be found [here](https://consul.io/docs/agent/http.html).
 
 Deleting an key is just as easy:
 
@@ -253,7 +253,7 @@ No JSON object could be decoded
 
 ### Security
 
-My examples above didn't utilize any sort of authentication mechanism. According to the Consul documentation, it supports a gossip mechanism (powered by [http://www.serfdom.io/docs/internals/security.html](Serf)) and Transport Layer Security using asymmetric encryption. More information [http://www.consul.io/docs/internals/security.html](here).
+My examples above didn't utilize any sort of authentication mechanism. According to the Consul documentation, it supports a gossip mechanism (powered by [http://www.serfdom.io/docs/internals/security.html](Serf)) and Transport Layer Security using asymmetric encryption. More information [here](http://www.consul.io/docs/internals/security.html).
 
 ### Conclusions
 
