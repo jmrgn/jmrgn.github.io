@@ -3,7 +3,7 @@ name: James Morgan's Blog
 ##Markdown processor
 markdown: redcarpet
 ##syntax highlighter
-#highlighter: rouge
+highlighter: rouge
 
 ##define base_url for valid usage in sitemap.xml and robots.txt
 base_url: http://jmrgn.github.io
