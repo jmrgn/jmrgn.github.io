@@ -5,6 +5,8 @@ name: James Morgan's Blog
 ##Some frequently used keywords on your website
 keywords: DotNet, coding, programming, csharp, aspdotnet, python
 
+##define base_url for valid usage in sitemap.xml and robots.txt
+base_url: http://jmrgn.github.io
 
 ##define this for disqus comment support
 disqus: jmrgn
