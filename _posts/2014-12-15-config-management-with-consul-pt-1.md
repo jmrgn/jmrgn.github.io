@@ -1,11 +1,11 @@
 ---
 layout: post
+tags: consul, configuration, configuration management
 title:  "Centralized Configuration Management with Consul pt. 1"
 date:   2014-12-15 20:15:00
-categories: consul, configuration, configuration management
 ---
 
-Managing configuration is a conceptually simple problem that developers tend to overcomplicate.
+Managing configuration is a conceptually simple problem that developers tend to overcomplicate. Compounding the problem is the fact that many of us maintain substantial codebases, often times implementing their own disparate configuration management schemes - some customized and home grown, others utilizing techniques and tools offered by development platforms themselves (e.g. .NET's build configuration-based Config Transforms).
 
 ## The Problem
 

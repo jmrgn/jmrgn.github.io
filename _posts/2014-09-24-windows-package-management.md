@@ -2,12 +2,14 @@
 layout: post
 title:  "Windows Package Management"
 date:   2014-09-23 18:14:00
-categories: dotnet
+tags: dotnet, boxstarter, chocolatey, package management
 ---
 
-## Why so difficult?
 
-Right now almost all of my work is within the Microsoft realm, and so I spend quite a bit of time in Windows. That being said, I've spent quite a bit of time working on other platforms and in other operating systems. One of the more significant projects I've been involved in recently was actually written in python and hosted on a flavor of linux. Consequently I did most of my development out of a Virtualbox VM running Ubuntu. One of the things that always impressed me with various linux distributions was the package management utilities that many come with (notably yum and apt-get). 
+
+Right now almost all of my work is within the Microsoft realm, and so I spend quite a bit of time in Windows. That being said, I've spent quite a bit of time working on other platforms and in other operating systems. One of the more significant projects I've been involved in recently was actually written in python and hosted on a flavor of linux. Consequently I did most of my development out of a Virtualbox VM running Ubuntu. One of the things that always impressed me with various linux distributions was the package management utilities that many come with (notably yum and apt-get).
+
+## Why so difficult?
 
 Use of these capabilities allows for very easy, standard setup of both a developer's machine and a production server alike. Whereas before I simply took the tedious process of installing applications on Windows as a sunk cost - the mundane tasks of downloading an installer, walking through the GUI, etc. - it has become very grating now that I've transitioned back to developing in .NET.
 
@@ -32,7 +34,7 @@ The name certainly gave me pause, but after perusing the site and playing around
 
 It's all fairly intuitive. Interestingly enough, after perusing the help and documentation a bit I soon learned that it doesn't just handle third party packages, it can also be used to enable windows features like IIS. This was starting to look more and more promising.
 
-Unfortunately, enabling various windows capabilities and features isn't quite as intuitive as installing basic packages. And it would be nice if someone could abstract things enough to keep that ease of use while combindng it with some of the more rich features that powershell scripting has to offer. My overall goal with Chocolatey - or really any package manager in general - is to be able to base-kick a developer machine or production machine. This can involve not only application installation and the enabling of windows features but often other commands not necessarily supported by Chocolatey (think: adding a domain, setting machine keys, etc.). Plus it would be nice if I could script up a series of chocolatey installations in tandem with powershell cmdlets. Sure, I could just create a quick powershell script, but we all know there's more to setting up a development environment than installing a few utilities. For instance, adding a machine to a domain requires a restart, and resuming script execution afterward can get tricky. 
+Unfortunately, enabling various windows capabilities and features isn't quite as intuitive as installing basic packages. And it would be nice if someone could abstract things enough to keep that ease of use while combindng it with some of the more rich features that powershell scripting has to offer. My overall goal with Chocolatey - or really any package manager in general - is to be able to base-kick a developer machine or production machine. This can involve not only application installation and the enabling of windows features but often other commands not necessarily supported by Chocolatey (think: adding a domain, setting machine keys, etc.). Plus it would be nice if I could script up a series of chocolatey installations in tandem with powershell cmdlets. Sure, I could just create a quick powershell script, but we all know there's more to setting up a development environment than installing a few utilities. For instance, adding a machine to a domain requires a restart, and resuming script execution afterward can get tricky.
 
 ## Enter Boxstarter
 
