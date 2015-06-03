@@ -1,12 +1,12 @@
 ---
 layout: post
-tags: SSL, TLS, .NET, DotNet, Poodle,
+tags: SSL TLS .NET DotNet Poodle
 date: 2015-01-01 13:13
 title: Diagnosing a Generic TLS Error
 published: true
 ---
 
-Recent events have unconvered vulnerabilities in versions of SSL/TLS, protocols that many developers and engineers have historically taken for granted as reasonably secure unless certificates are leaked or encryption techniques become outdated. As these security flaws are made public, deveopers often discover ancillary issues as patches are installed, old protocols are invalidated, and new ones become mainstream. [POODLE](http://en.wikipedia.org/wiki/POODLE) is a great example of this. It is standard practice for older protocols to be supported for a period of time and then disabled when new certs are issued. If engineers haven't scrutinized the current state of their machines and the applications that run on them, they could be in for a rude awakening.
+Recent events have uncovered vulnerabilities in versions of SSL/TLS, protocols that many developers and engineers have historically taken for granted as reasonably secure unless certificates are leaked or encryption techniques become outdated. As these security flaws are made public, developers often discover ancillary issues as patches are installed, old protocols are invalidated, and new ones become mainstream. [POODLE](http://en.wikipedia.org/wiki/POODLE) is a great example of this. It is standard practice for older protocols to be supported for a period of time and then disabled when new certs are issued. If engineers haven't scrutinized the current state of their machines and the applications that run on them, they could be in for a rude awakening.
 
 
 ### The Problem
@@ -113,7 +113,7 @@ ___
 
 Adding the same line to the application's startup code resolved the issue. While I can see that it may be necessary to allow and disable certain Security protocols on an application-specific basis, it is both tedious and error-prone to force a developer to expressly add a more secure version that is natively supported by the server the machine is running on. So what tells the ServicePointManager to default to SSL3 and TLS 1.0? Can the default value be overridden in configuration?
 
-Unfurtnately, the MSDN article on the [servicePointManager configuration element](https://msdn.microsoft.com/en-us/library/zsk61s76(v=vs.110).aspx) doesn't allow for such fine tuning. The encryptionPolicy attribute only allows for specifying whether encryption is required, not whether specific encryption protocols should be enforced. Going any further requires taking a dive into the code.
+Unfortunately, the MSDN article on the [servicePointManager configuration element](https://msdn.microsoft.com/en-us/library/zsk61s76(v=vs.110).aspx) doesn't allow for such fine tuning. The encryptionPolicy attribute only allows for specifying whether encryption is required, not whether specific encryption protocols should be enforced. Going any further requires taking a dive into the code.
 
 
 ### The Investigation pt. IV - The .NET Runtime - System.Net.ServicePointManager
@@ -193,7 +193,7 @@ private static void EnsureStrongCryptoSettingsInitialized() {
 }
 ```
 
-That method gets called once in order to ensure that cryptophrapgic protocols are set correctly. After looking through the entire class and working through the code, it appears as if it is driven by the presence of a registry value called `SchUseStrongCrypto` located in:
+That method gets called once in order to ensure that cryptographic protocols are set correctly. After looking through the entire class and working through the code, it appears as if it is driven by the presence of a registry value called `SchUseStrongCrypto` located in:
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\{version}\SchUseStrongCrypto

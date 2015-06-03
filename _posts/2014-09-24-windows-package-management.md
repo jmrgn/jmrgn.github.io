@@ -2,7 +2,7 @@
 layout: post
 title:  "Windows Package Management"
 date:   2014-09-23 18:14:00
-tags: dotnet, boxstarter, chocolatey, package management
+tags: dotnet boxstarter chocolatey package management
 ---
 
 

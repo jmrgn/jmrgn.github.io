@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: consul, configuration, configuration management
+tags: consul configuration configuration_management
 title:  "Centralized Configuration Management with Consul pt. 1"
 date:   2014-12-15 20:15:00
 ---
