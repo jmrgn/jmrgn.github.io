@@ -1,28 +1,25 @@
+# Site settings
 ##The website title
 name: James Morgan's Blog
-##Markdown processor
-markdown: redcarpet
-##syntax highlighter
-highlighter: rouge
 
-##define base_url for valid usage in sitemap.xml and robots.txt
-base_url: http://jmrgn.github.io
-sass:
-  sass_dir: _sass
-  style: :compressed
-paginate: 5
-paginate_path: "page:num"
-##The website description (to be used in meta tags)
-description: A tech blog on software development and all things related, authored by coder James Morgan
 ##Some frequently used keywords on your website
 keywords: DotNet, coding, programming, csharp, aspdotnet, python
+
 
 ##define this for disqus comment support
 disqus: jmrgn
 
-##set this to enable google analytics
-#ga_id: analyticsID
-#ga_domain: analyticsDomain
+##The website description (to be used in meta tags)
+description: A tech blog on software development and all things related, authored by coder James Morgan
+logo_location: "http://placehold.it/100x100&text=LOGO"
+
+base_url: http://jmrgn.github.io
+#url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: redcarpet
+
+highlighter: rouge
 
 ##Some commonly used links
 links:
@@ -30,5 +27,5 @@ links:
   email: j.a.mrgn@gmail.com
   github: jmrgn
 
-##put desired image in img/ directory and set the value accordingly. If not defined, a placeholder image will be used.
-about_image: placeholder.jpg
+#Other Global Configuration
+exclude: ['README.md']
