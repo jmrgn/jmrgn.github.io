@@ -193,7 +193,7 @@ private static void EnsureStrongCryptoSettingsInitialized() {
 }
 ```
 
-That method gets called once in order to ensure that cryptophrapgic protocols are set correctly. After looking through the entire class and working through the code, it appears as if it is driven by the presence of a registry value located in:
+That method gets called once in order to ensure that cryptophrapgic protocols are set correctly. After looking through the entire class and working through the code, it appears as if it is driven by the presence of a registry value called `SchUseStrongCrypto` located in:
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\{version}\SchUseStrongCrypto
@@ -222,4 +222,23 @@ try {
 }
 ```
 
-If that value is **enabled** (i.e. set to 1), the system will once again use TLS 1.0 and SSL3 as 'secure' protocols. As we've seen with POODLE, SSLv3 is **not** in fact secure anymore.
+It turns out Enum.Parse will load the equivalent logical OR to my above example with a value of:
+```
+<add key="System.Net.ServicePointManager.SecurityProtocol" value="Ssl3, Tls, Tls12"/>
+```
+
+What if SchUseStrongCrypto is **enabled**? If that value **enabled** (i.e. set to 1), the `disableStrongCryptoInternal` flag will be set to true, and the following code block will execute:
+
+```CSharp
+if (disableStrongCryptoInternal) {
+    // Revert the SecurityProtocol selection to the legacy combination.
+    s_SecurityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+}
+```
+
+Meaning, the system will once again use TLS 1.0 and SSL3 as 'secure' protocols. As we've seen with POODLE, SSLv3 is **not** in fact secure anymore. It seems like the best solution for now is to make things as explicit in code as possible.
+
+
+### Conclusions
+
+All in all, I'm not too impressed. It looks like the only way to configure things correctly is to **misuse** a registry key and add in special application configuration. It'd be much more straightforward to add in a similar application configuration and use it in code. Furthermore, using the SchUseStrongCrypto correctly (i.e. enabled with a value of 1) could actually mislead a developer into thinking the enabled protocols are actually secure. Given the recent security vulnerabilities that have very quickly invalidated what were considered to be very secure protocols, I hope that Microsoft improves on this by keeping the flexibility to enable higher-level security in code, but also adds in the ability to holistically set a secure baseline of encryption protocols.
