@@ -206,7 +206,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\MICROSOFT\.NETFramework\{version}\SchUse
 ```
 
 
-If that value is **enabled**, the method will set the security protocols yet again, and then to read a configuration value from AppSettings, of all places. Specifically, it appears as if it will do an Enum.Parse on the value of:
+If that value is **enabled**, the method will set the security protocols yet again. It then attempts to read a configuration value from AppSettings, of all places. Specifically, it appears as if it will do an Enum.Parse on the value of:
 
 ```
 private static string secureProtocolAppSetting = "System.Net.ServicePointManager.SecurityProtocol";
