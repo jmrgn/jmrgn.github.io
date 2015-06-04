@@ -21,7 +21,7 @@ base_url: http://jmrgn.github.io
 # Build settings
 markdown: redcarpet
 
-highlighter: rouge
+highlighter: pygments
 
 ##Some commonly used links
 links:
