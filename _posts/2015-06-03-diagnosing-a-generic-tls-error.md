@@ -206,7 +206,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\MICROSOFT\.NETFramework\{version}\SchUse
 ```
 
 
-If that value is **disabled**, the method will default the security protocol yet again, and then to read a configuration value from AppSettings, of all places. Specifically, it appears as if it will do an Enum.Parse on the value of:
+If that value is **enabled**, the method will set the security protocols yet again, and then to read a configuration value from AppSettings, of all places. Specifically, it appears as if it will do an Enum.Parse on the value of:
 
 ```
 private static string secureProtocolAppSetting = "System.Net.ServicePointManager.SecurityProtocol";
@@ -227,7 +227,7 @@ It turns out Enum.Parse will load the equivalent logical OR to my above example 
 <add key="System.Net.ServicePointManager.SecurityProtocol" value="Ssl3, Tls, Tls12"/>
 ```
 
-What if SchUseStrongCrypto is **enabled**? If that value **enabled** (i.e. set to 1), the `disableStrongCryptoInternal` flag will be set to true, and the following code block will execute:
+What if SchUseStrongCrypto is **disabled**? If that value **disabled** (i.e. set to 1), the `disableStrongCryptoInternal` flag will be set to true, and the following code block will execute:
 
 ```CSharp
 if (disableStrongCryptoInternal) {
