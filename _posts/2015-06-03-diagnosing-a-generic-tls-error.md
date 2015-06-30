@@ -1,7 +1,7 @@
 ---
 layout: post
 tags: SSL TLS .NET DotNet Poodle
-date: 2015-01-01 13:13
+date: 2015-06-04 13:13
 title: Diagnosing a Generic TLS Error
 published: true
 ---
